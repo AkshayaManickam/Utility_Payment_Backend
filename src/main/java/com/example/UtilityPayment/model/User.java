@@ -54,6 +54,43 @@ public class User {
 
     // Getters and Setters
 
+    @Min(0)
+    @Column(nullable = false)
+    private double creditCardBalance = 50000.0;  // Default Mock Balance
+
+    @Min(0)
+    @Column(nullable = false)
+    private double debitCardBalance = 30000.0;  // Default Mock Balance
+
+    @Min(0)
+    @Column(nullable = false)
+    private double walletBalance = 20000.0;
+
+    public double getCreditCardBalance() {
+        return creditCardBalance;
+    }
+
+    public void setCreditCardBalance(double creditCardBalance) {
+        this.creditCardBalance = creditCardBalance;
+    }
+
+    public double getDebitCardBalance() {
+        return debitCardBalance;
+    }
+
+    public void setDebitCardBalance(double debitCardBalance) {
+        this.debitCardBalance = debitCardBalance;
+    }
+
+    public double getWalletBalance() {
+        return walletBalance;
+    }
+
+    public void setWalletBalance(double walletBalance) {
+        this.walletBalance = walletBalance;
+    }
+// Default Mock Balance
+
 
     public String getName() {
         return name;
