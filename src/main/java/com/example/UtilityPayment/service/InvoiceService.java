@@ -17,4 +17,7 @@ public class InvoiceService {
     public List<Invoice> getPendingBills(String userEmail) {
         return invoiceRepository.findPendingBillsByUserEmail(userEmail);
     }
+    public Invoice getInvoiceById(Long invoiceId) {
+        return invoiceRepository.findById(invoiceId).orElse(null);
+    }
 }
