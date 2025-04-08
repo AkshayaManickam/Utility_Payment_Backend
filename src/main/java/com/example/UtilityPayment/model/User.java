@@ -52,8 +52,6 @@ public class User {
     @Column(nullable = false)
     private String startDate;
 
-    // Getters and Setters
-
     @Min(0)
     @Column(nullable = false)
     private double creditCardBalance = 50000.0;  // Default Mock Balance

@@ -4,7 +4,6 @@ import com.example.UtilityPayment.model.Employee;
 import com.example.UtilityPayment.model.Help;
 import com.example.UtilityPayment.model.Status;
 import com.example.UtilityPayment.model.User;
-import com.example.UtilityPayment.repository.AuthenticationRepository;
 import com.example.UtilityPayment.repository.EmployeeRepository;
 import com.example.UtilityPayment.repository.HelpRepository;
 import com.example.UtilityPayment.repository.UserRepository;
@@ -31,16 +30,12 @@ public class HelpController {
     @PostMapping("/create")
     public Help createHelpRequest(@RequestBody Help help) {
         help.setStatus(Status.SENT);
-
         Optional<User> userOptional = userRepository.findByEmail(help.getUserMail());
         if (userOptional.isPresent()) {
-            String userAddress = userOptional.get().getAddress(); // e.g., "1027,Ukkadam"
-
-            // Extract location: take part after comma
+            String userAddress = userOptional.get().getAddress();
             String[] addressParts = userAddress.split(",");
             if (addressParts.length > 1) {
-                String location = addressParts[1].trim(); // "Ukkadam"
-
+                String location = addressParts[1].trim();
                 Optional<Employee> employeeOptional = employeeRepository.findByLocation(location);
                 if (employeeOptional.isPresent()) {
                     Employee assignedEmployee = employeeOptional.get();
@@ -57,8 +52,6 @@ public class HelpController {
         }
         return helpRepository.save(help);
     }
-
-
 
     @GetMapping("/user/{userMail}")
     public List<Help> getHelpRequestsByUser(@PathVariable String userMail) {
