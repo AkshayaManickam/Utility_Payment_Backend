@@ -4,6 +4,7 @@ import com.example.UtilityPayment.model.User;
 import com.example.UtilityPayment.repository.UserRepository;
 import com.example.UtilityPayment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,16 @@ public class UserController {
             return ResponseEntity.notFound().build();  // Return 404 properly
         }
         return ResponseEntity.ok(units);
+    }
+
+    @PostMapping("/add-money")
+    public ResponseEntity<?> addMoneyToWallet(@RequestParam String email, @RequestParam double amount) {
+        boolean success = userService.addWalletAmount(email, amount);
+        if (success) {
+            return ResponseEntity.ok("Amount added successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
     }
 }
 

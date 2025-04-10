@@ -29,16 +29,19 @@ public class Help {
     @Column(nullable = true)
     private String newValue;  // Stores new value (if applicable)
 
-    @Column(name = "assigned_to")
-    private String assignedTo;
 
-    public String getAssignedTo() {
-        return assignedTo;
+    @Column(columnDefinition = "TEXT") // For longer description
+    private String description;
+
+
+    public String getDescription() {
+        return description;
     }
 
-    public void setAssignedTo(String assignedTo) {
-        this.assignedTo = assignedTo;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
 
     public Help(Long id, String userMail, String query, Status status, String oldValue, String newValue) {
         this.id = id;

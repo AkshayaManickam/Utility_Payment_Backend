@@ -23,5 +23,20 @@ public class UserService {
         Optional<User> user = userRepository.findByEmail(userEmail);
         return user.map(User::getUnitsConsumption).orElse(0);
     }
+
+    public boolean addWalletAmount(String email, double amount) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setWalletBalance(user.getWalletBalance() + amount);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }
 
