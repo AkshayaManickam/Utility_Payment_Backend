@@ -33,8 +33,12 @@ public class PaymentService {
     public boolean processPayment(Long invoiceId, double amount, String paymentMethod,String discountType) {
         System.out.println(amount);
         System.out.println(paymentMethod);
-        Invoice invoice = invoiceRepository.findByIdAndIsPaid(invoiceId,"Not Paid")
-                .orElseThrow(() -> new RuntimeException("Invoice not found or already paid"));
+        Invoice invoice = invoiceRepository.findById(invoiceId)
+                .orElseThrow(() -> new RuntimeException("Invoice not found"));
+
+        if ("PAID".equalsIgnoreCase(invoice.getIsPaid())) {
+            throw new RuntimeException("Invoice already paid");
+        }
 
         User user = userRepository.findById(invoice.getUser().getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));

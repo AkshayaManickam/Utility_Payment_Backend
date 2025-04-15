@@ -34,7 +34,7 @@ public class PaymentController {
             Long invoiceId = ((Number) requestData.get("invoiceId")).longValue();
             double amountPaid = ((Number) requestData.get("amount")).doubleValue();
             String paymentMethod = (String) requestData.get("paymentMethod");
-            String discountType = (String) requestData.get("discountType");  // ✅ Extract discount
+            String discountType = (String) requestData.get("discountType");
 
             boolean success = paymentService.processPayment(invoiceId, amountPaid, paymentMethod, discountType);
 
