@@ -36,7 +36,7 @@ public class SecurityConfig {
                         .maxSessionsPreventsLogin(true)
                         .sessionRegistry(sessionRegistry())
                 )
-                .cors().configurationSource(corsConfigurationSource());  // Apply the CORS configuration here
+                .cors().configurationSource(corsConfigurationSource());
 
         return http.build();
     }
@@ -49,6 +49,7 @@ public class SecurityConfig {
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
+        config.setMaxAge(3600L);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;

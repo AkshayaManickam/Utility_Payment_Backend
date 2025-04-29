@@ -59,7 +59,6 @@ public class SessionValidationFilter extends OncePerRequestFilter {
             System.out.println(session);
 
             if (session != null) {
-                // Log the session ID from the request
                 System.out.println("Session ID from request: " + session.getId());
 
                 if (sessionIdToUse.equals(session.getId())) {

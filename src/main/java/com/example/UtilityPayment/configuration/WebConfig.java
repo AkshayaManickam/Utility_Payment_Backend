@@ -13,6 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:4300")  // Allow requests from Angular app
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Allow these methods
                 .allowedHeaders("*")  // Allow all headers
-                .allowCredentials(true);  // Allow credentials (cookies, authorization headers)
+                .allowCredentials(true) // Allow credentials (cookies, authorization headers)
+                .maxAge(3600L);
     }
 }

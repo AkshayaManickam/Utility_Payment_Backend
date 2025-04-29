@@ -37,21 +37,13 @@ public class AuthenticationController {
     @PostMapping("/generate-otp")
     public ResponseEntity<Map<String, String>> generateOtp(@RequestBody Map<String, String> request) {
         String email = request.get("email");
-        String otp = authenticationService.generateOtp(email);
-
-        Map<String, String> response = new HashMap<>();
-        if (otp.equals("Email does not exist!")) {
-            response.put("message", otp);
+        Map<String, String> response = authenticationService.generateOtp(email);
+        if (response.get("message").equals("Email does not exist!")) {
             return ResponseEntity.badRequest().body(response);
         }
-
-        if (otp.equals("User already logged in. Cannot generate OTP.")) {
-            response.put("message", "User already has an active session.");
-            return ResponseEntity.status(409).body(response);  // << Show toastr from Angular
+        if (response.get("message").equals("User already logged in. Cannot generate OTP.")) {
+            return ResponseEntity.status(409).body(response);
         }
-
-        response.put("message", "OTP Sent Successfully");
-        response.put("otp", otp); // For development (remove in production)
         return ResponseEntity.ok(response);
     }
 
